@@ -1,7 +1,7 @@
 package br.com.alura.financask.ui.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import br.com.alura.financask.R
 import br.com.alura.financask.ui.adapter.ListaTransacoesAdapter
