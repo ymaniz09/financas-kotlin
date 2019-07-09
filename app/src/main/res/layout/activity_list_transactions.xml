@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,13 +15,14 @@
             layout="@layout/resumo_card" />
 
         <ListView
-            android:id="@+id/lista_transacoes_listview"
+            android:id="@+id/activity_transactions_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignBottom="@id/lista_transacoes_resumo"
             android:layout_alignParentBottom="true"
             android:divider="@null"
-            android:dividerHeight="0dp" />
+            android:dividerHeight="0dp"
+            tools:listitem="@layout/transaction_item" />
 
     </LinearLayout>
 
@@ -28,11 +30,11 @@
         android:id="@+id/lista_transacoes_adiciona_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         fab:menu_backgroundColor="#ccffffff"
         fab:menu_colorNormal="#367C25"
         fab:menu_colorPressed="#266817"
