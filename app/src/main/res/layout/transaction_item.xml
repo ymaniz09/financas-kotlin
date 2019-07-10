@@ -35,11 +35,13 @@
                     android:id="@+id/transaction_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    tools:text="quinzecaracteres.." />
+                    tools:text="A huge category name that is " />
 
                 <TextView
                     android:id="@+id/transaction_date"
@@ -54,10 +56,10 @@
                 android:id="@+id/transaction_value"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="right|bottom"
-                android:textSize="20dp"
+                android:gravity="end|bottom"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 tools:text="R$ 100,00" />
 

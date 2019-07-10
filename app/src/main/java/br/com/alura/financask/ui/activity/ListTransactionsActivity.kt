@@ -20,7 +20,8 @@ class ListTransactionsActivity : AppCompatActivity() {
                 Transaction(BigDecimal(20.5), "Food"),
                 Transaction(BigDecimal(30.5), "Uber"),
                 Transaction(BigDecimal(130.5)),
-                Transaction(total = BigDecimal(230.5), type = TransactionType.INCOME))
+                Transaction(total = BigDecimal(230.5), type = TransactionType.INCOME),
+                Transaction(category = "A really big category name", total = BigDecimal(230.5), type = TransactionType.INCOME))
 
         activity_transactions_list_view.adapter = TransactionsListAdapter(transactions, this)
     }

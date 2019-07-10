@@ -1,13 +1,14 @@
 package br.com.alura.financask.ui.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
 import br.com.alura.financask.R
 import br.com.alura.financask.extension.formatDate
+import br.com.alura.financask.extension.formatToBrazilCurrency
+import br.com.alura.financask.extension.layoutInflater
 import br.com.alura.financask.model.Transaction
 import br.com.alura.financask.model.TransactionType
 import kotlinx.android.synthetic.main.transaction_item.view.*
@@ -16,24 +17,33 @@ class TransactionsListAdapter(private val transactions: List<Transaction>,
                               private val context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        val newView = LayoutInflater.from(context)
+
+        val newView = view ?: context.layoutInflater
                 .inflate(R.layout.transaction_item, parent, false)
 
         val transaction = transactions[position]
 
         if (transaction.type == TransactionType.INCOME) {
-            newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.income))
-            newView.transaction_icon.setBackgroundResource(R.drawable.transaction_income_icon)
+            setupIncomeView(newView)
         } else {
-            newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.outcome))
-            newView.transaction_icon.setBackgroundResource(R.drawable.transaction_outcome_icon)
+            setupOutcomeView(newView)
         }
 
-        newView.transaction_value.text = transaction.total.toEngineeringString()
+        newView.transaction_value.text = transaction.total.formatToBrazilCurrency()
         newView.transaction_category.text = transaction.category
         newView.transaction_date.text = transaction.date.formatDate()
 
         return newView
+    }
+
+    private fun setupOutcomeView(newView: View) {
+        newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.outcome))
+        newView.transaction_icon.setBackgroundResource(R.drawable.transaction_outcome_icon)
+    }
+
+    private fun setupIncomeView(newView: View) {
+        newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.income))
+        newView.transaction_icon.setBackgroundResource(R.drawable.transaction_income_icon)
     }
 
     override fun getItem(position: Int): Transaction {
