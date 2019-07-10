@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import br.com.alura.financask.R
-import br.com.alura.financask.ui.model.Transaction
+import br.com.alura.financask.extension.formatDate
+import br.com.alura.financask.model.Transaction
 import kotlinx.android.synthetic.main.transaction_item.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TransactionsListAdapter(private val transactions: List<Transaction>,
                               private val context: Context) : BaseAdapter() {
@@ -24,8 +23,8 @@ class TransactionsListAdapter(private val transactions: List<Transaction>,
         newView.transaction_category.text = transaction.category
 
 
-        newView.transaction_date.text =
-                SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(transaction.date.time)
+        newView.transaction_date.text = transaction.date.formatDate()
+
 
         return newView
     }
@@ -41,5 +40,5 @@ class TransactionsListAdapter(private val transactions: List<Transaction>,
     override fun getCount(): Int {
         return transactions.size
     }
-    
+
 }

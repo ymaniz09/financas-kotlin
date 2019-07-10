@@ -1,4 +1,4 @@
-package br.com.alura.financask.ui.model
+package br.com.alura.financask.model
 
 import java.math.BigDecimal
 import java.util.*

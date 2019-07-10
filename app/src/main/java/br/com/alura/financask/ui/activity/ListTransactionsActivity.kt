@@ -3,8 +3,8 @@ package br.com.alura.financask.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.financask.R
+import br.com.alura.financask.model.Transaction
 import br.com.alura.financask.ui.adapter.TransactionsListAdapter
-import br.com.alura.financask.ui.model.Transaction
 import kotlinx.android.synthetic.main.activity_list_transactions.*
 import java.math.BigDecimal
 import java.util.*
