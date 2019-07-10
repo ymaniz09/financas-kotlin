@@ -6,15 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import br.com.alura.financask.R
+import br.com.alura.financask.ui.model.Transaction
+import kotlinx.android.synthetic.main.transaction_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
-class TransactionsListAdapter(private val transactions: List<String>,
+class TransactionsListAdapter(private val transactions: List<Transaction>,
                               private val context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        return LayoutInflater.from(context).inflate(R.layout.transaction_item, parent, false)
+        val newView = LayoutInflater.from(context)
+                .inflate(R.layout.transaction_item, parent, false)
+
+        val transaction = transactions[position]
+
+        newView.transaction_value.text = transaction.total.toEngineeringString()
+        newView.transaction_category.text = transaction.category
+
+
+        newView.transaction_date.text =
+                SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(transaction.date.time)
+
+        return newView
     }
 
-    override fun getItem(position: Int): String {
+    override fun getItem(position: Int): Transaction {
         return transactions[position]
     }
 
@@ -25,6 +41,5 @@ class TransactionsListAdapter(private val transactions: List<String>,
     override fun getCount(): Int {
         return transactions.size
     }
-
-
+    
 }
