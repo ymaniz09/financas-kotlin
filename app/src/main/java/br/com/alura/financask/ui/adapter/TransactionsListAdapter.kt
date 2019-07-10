@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.core.content.ContextCompat
 import br.com.alura.financask.R
 import br.com.alura.financask.extension.formatDate
 import br.com.alura.financask.model.Transaction
+import br.com.alura.financask.model.TransactionType
 import kotlinx.android.synthetic.main.transaction_item.view.*
 
 class TransactionsListAdapter(private val transactions: List<Transaction>,
@@ -19,12 +21,17 @@ class TransactionsListAdapter(private val transactions: List<Transaction>,
 
         val transaction = transactions[position]
 
+        if (transaction.type == TransactionType.INCOME) {
+            newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.income))
+            newView.transaction_icon.setBackgroundResource(R.drawable.transaction_income_icon)
+        } else {
+            newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.outcome))
+            newView.transaction_icon.setBackgroundResource(R.drawable.transaction_outcome_icon)
+        }
+
         newView.transaction_value.text = transaction.total.toEngineeringString()
         newView.transaction_category.text = transaction.category
-
-
         newView.transaction_date.text = transaction.date.formatDate()
-
 
         return newView
     }
