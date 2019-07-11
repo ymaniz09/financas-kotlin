@@ -6,4 +6,5 @@ import java.util.*
 
 fun BigDecimal.formatToBrazilCurrency(): String {
     return DecimalFormat.getCurrencyInstance(Locale("pt", "BR")).format(this)
+            .replace("-R$", "R$ -")
 }

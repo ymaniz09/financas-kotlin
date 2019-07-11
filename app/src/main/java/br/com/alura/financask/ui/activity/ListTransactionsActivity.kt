@@ -22,7 +22,8 @@ class ListTransactionsActivity : AppCompatActivity() {
                 Transaction(BigDecimal(30.5), "Uber"),
                 Transaction(BigDecimal(130.5)),
                 Transaction(total = BigDecimal(230.5), type = TransactionType.INCOME),
-                Transaction(category = "A really big category name", total = BigDecimal(230.5), type = TransactionType.INCOME))
+                Transaction(category = "A really big category name", total = BigDecimal(230.5), type = TransactionType.INCOME),
+                Transaction(BigDecimal(1999.99), "Food"))
 
         activity_transactions_list_view.adapter = TransactionsListAdapter(transactions, this)
 
@@ -31,7 +32,7 @@ class ListTransactionsActivity : AppCompatActivity() {
 
     private fun setupSummary(transactions: List<Transaction>) {
         val view = window.decorView
-        val summaryView = SummaryView(view, transactions)
+        val summaryView = SummaryView(this, view, transactions)
         summaryView.setupIncome()
         summaryView.setupOutgo()
         summaryView.setupTotal()

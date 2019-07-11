@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_bottom_left_white_24dp"
-            fab:fab_colorNormal="@color/outcome"
+            fab:fab_colorNormal="@color/outgo"
             fab:fab_colorPressed="#E8004A"
             fab:fab_colorRipple="#C20024"
             fab:fab_label="@string/adiciona_despesa"

@@ -37,7 +37,7 @@ class TransactionsListAdapter(private val transactions: List<Transaction>,
     }
 
     private fun setupOutcomeView(newView: View) {
-        newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.outcome))
+        newView.transaction_value.setTextColor(ContextCompat.getColor(context, R.color.outgo))
         newView.transaction_icon.setBackgroundResource(R.drawable.transaction_outcome_icon)
     }
 

@@ -1,28 +1,54 @@
 package br.com.alura.financask.ui
 
+import android.content.Context
 import android.view.View
+import androidx.core.content.ContextCompat
+import br.com.alura.financask.R
 import br.com.alura.financask.extension.formatToBrazilCurrency
 import br.com.alura.financask.model.Summary
 import br.com.alura.financask.model.Transaction
 import kotlinx.android.synthetic.main.resumo_card.view.*
+import java.math.BigDecimal
 
-class SummaryView(private val view: View,
+class SummaryView(private val context: Context,
+                  private val view: View,
                   transactions: List<Transaction>) {
 
     private val summary = Summary(transactions)
 
+    private val incomeColor = ContextCompat.getColor(context, R.color.income)
+    private val outgoColor = ContextCompat.getColor(context, R.color.outgo)
+
     fun setupIncome() {
         val total = summary.income()
-        view.income_summary.text = total.formatToBrazilCurrency()
+        with(view.income_summary) {
+            text = total.formatToBrazilCurrency()
+            setTextColor(incomeColor)
+        }
     }
 
     fun setupOutgo() {
         val total = summary.outgo()
-        view.outgo_summary.text = total.formatToBrazilCurrency()
+        with(view.outgo_summary) {
+            text = total.formatToBrazilCurrency()
+            setTextColor(outgoColor)
+        }
     }
 
     fun setupTotal() {
         val total = summary.total()
-        view.total_summary.text = total.formatToBrazilCurrency()
+        val color = getColorByValue(total)
+        with(view.total_summary) {
+            text = total.formatToBrazilCurrency()
+            setTextColor(color)
+        }
+    }
+
+    private fun getColorByValue(total: BigDecimal): Int {
+        return if (total < BigDecimal.ZERO) {
+            outgoColor
+        } else {
+            incomeColor
+        }
     }
 }
