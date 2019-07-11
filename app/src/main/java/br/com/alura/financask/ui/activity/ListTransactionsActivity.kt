@@ -33,9 +33,7 @@ class ListTransactionsActivity : AppCompatActivity() {
     private fun setupSummary(transactions: List<Transaction>) {
         val view = window.decorView
         val summaryView = SummaryView(this, view, transactions)
-        summaryView.setupIncome()
-        summaryView.setupOutgo()
-        summaryView.setupTotal()
+        summaryView.setupSummaryView()
     }
 
 }

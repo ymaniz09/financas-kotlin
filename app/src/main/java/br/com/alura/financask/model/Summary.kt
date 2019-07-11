@@ -3,31 +3,15 @@ package br.com.alura.financask.model
 import java.math.BigDecimal
 
 class Summary(private val transactions: List<Transaction>) {
-    fun income(): BigDecimal {
-        var total = BigDecimal.ZERO
+    val income get() = sumByTransactionType(TransactionType.INCOME)
 
-        for (transaction in transactions) {
-            if (transaction.type == TransactionType.INCOME) {
-                total = total.plus(transaction.total)
-            }
-        }
+    val outgo get() = sumByTransactionType(TransactionType.OUTGO)
 
-        return total
-    }
+    val total: BigDecimal get() = income.subtract(outgo)
 
-    fun outgo(): BigDecimal {
-        var total = BigDecimal.ZERO
-
-        for (transaction in transactions) {
-            if (transaction.type == TransactionType.OUTGO) {
-                total = total.plus(transaction.total)
-            }
-        }
-
-        return total
-    }
-
-    fun total(): BigDecimal {
-        return income().subtract(outgo())
+    private fun sumByTransactionType(transactionType: TransactionType): BigDecimal {
+        return BigDecimal(transactions
+                .filter { it.type == transactionType }
+                .sumByDouble { it.total.toDouble() })
     }
 }

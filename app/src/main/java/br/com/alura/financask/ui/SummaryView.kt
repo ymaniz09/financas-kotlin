@@ -19,24 +19,24 @@ class SummaryView(private val context: Context,
     private val incomeColor = ContextCompat.getColor(context, R.color.income)
     private val outgoColor = ContextCompat.getColor(context, R.color.outgo)
 
-    fun setupIncome() {
-        val total = summary.income()
+    private fun setupIncome() {
+        val total = summary.income
         with(view.income_summary) {
             text = total.formatToBrazilCurrency()
             setTextColor(incomeColor)
         }
     }
 
-    fun setupOutgo() {
-        val total = summary.outgo()
+    private fun setupOutgo() {
+        val total = summary.outgo
         with(view.outgo_summary) {
             text = total.formatToBrazilCurrency()
             setTextColor(outgoColor)
         }
     }
 
-    fun setupTotal() {
-        val total = summary.total()
+    private fun setupTotal() {
+        val total = summary.total
         val color = getColorByValue(total)
         with(view.total_summary) {
             text = total.formatToBrazilCurrency()
@@ -50,5 +50,11 @@ class SummaryView(private val context: Context,
         } else {
             incomeColor
         }
+    }
+
+    fun setupSummaryView() {
+        setupIncome()
+        setupOutgo()
+        setupTotal()
     }
 }
