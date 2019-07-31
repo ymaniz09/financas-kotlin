@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="categorias_de_receita">
+    <string-array name="income_category">
         <item>Receita indefinida</item>
         <item>Economias</item>
         <item>Empréstimo</item>

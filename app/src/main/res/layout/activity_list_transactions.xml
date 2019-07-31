@@ -27,7 +27,7 @@
     </LinearLayout>
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/lista_transacoes_adiciona_menu"
+        android:id="@+id/activity_transactions_floating_action_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -46,25 +46,25 @@
 
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/lista_transacoes_adiciona_receita"
+            android:id="@+id/activity_transactions_floating_action_button_add_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_top_right_white_24dp"
             fab:fab_colorNormal="@color/income"
             fab:fab_colorPressed="#2945fc"
             fab:fab_colorRipple="#3216e2"
-            fab:fab_label="@string/adiciona_receita"
+            fab:fab_label="@string/add_income"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/lista_transacoes_adiciona_despesa"
+            android:id="@+id/activity_transactions_floating_action_button_add_outgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_bottom_left_white_24dp"
             fab:fab_colorNormal="@color/outgo"
             fab:fab_colorPressed="#E8004A"
             fab:fab_colorRipple="#C20024"
-            fab:fab_label="@string/adiciona_despesa"
+            fab:fab_label="@string/add_outgo"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
