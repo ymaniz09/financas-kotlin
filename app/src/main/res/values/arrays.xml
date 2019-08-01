@@ -9,7 +9,7 @@
         <item>Salário</item>
         <item>Vendas</item>
     </string-array>
-    <string-array name="categorias_de_despesa">
+    <string-array name="outgo_category">
         <item>Despesa indefinida</item>
         <item>Casa</item>
         <item>Comida</item>

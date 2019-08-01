@@ -22,26 +22,30 @@ class TransactionDialog(private val viewGroup: ViewGroup,
                         private val context: Context) {
 
     private val layoutView = inflateLayout()
+    private val dateEditText = layoutView.form_transaction_date
+    private val categorySpinner = layoutView.form_transaction_category
 
-    fun setupDialog(transactionDelegate: TransactionDelegate) {
+    fun showDialog(type: TransactionType, transactionDelegate: TransactionDelegate) {
         setupDate()
-        setupCategory()
-        setupInputDialog(transactionDelegate)
+        setupCategory(type)
+        setupInputDialog(type, transactionDelegate)
     }
 
-    private fun setupInputDialog(transactionDelegate: TransactionDelegate) {
+    private fun setupInputDialog(type: TransactionType, transactionDelegate: TransactionDelegate) {
+        val title = getTitleByTransactionType(type)
+
         AlertDialog.Builder(context)
-                .setTitle(R.string.add_income)
+                .setTitle(title)
                 .setView(layoutView)
                 .setPositiveButton("Add"
                 ) { _, _ ->
                     val valueString = layoutView.form_transaction_value.text.toString()
-                    val dateString = layoutView.form_transaction_date.text.toString()
-                    val categoryString = layoutView.form_transaction_category.selectedItem.toString()
+                    val dateString = dateEditText.text.toString()
+                    val categoryString = categorySpinner.selectedItem.toString()
                     val total = convertTotalField(valueString)
                     val date = dateString.convertToCalendar()
 
-                    val newTransaction = Transaction(type = TransactionType.INCOME,
+                    val newTransaction = Transaction(type = type,
                             total = total,
                             date = date,
                             category = categoryString)
@@ -53,6 +57,14 @@ class TransactionDialog(private val viewGroup: ViewGroup,
                 .show()
     }
 
+    private fun getTitleByTransactionType(type: TransactionType): Int {
+        return if (type == TransactionType.INCOME) {
+            R.string.add_income
+        } else {
+            R.string.add_outgo
+        }
+    }
+
     private fun convertTotalField(valueString: String): BigDecimal {
         return try {
             BigDecimal(valueString)
@@ -62,12 +74,22 @@ class TransactionDialog(private val viewGroup: ViewGroup,
         }
     }
 
-    private fun setupCategory() {
+    private fun setupCategory(type: TransactionType) {
+        val category = getCategoryByTransactionType(type)
+
         val adapter = ArrayAdapter.createFromResource(context,
-                R.array.income_category,
+                category,
                 android.R.layout.simple_spinner_dropdown_item)
 
-        layoutView.form_transaction_category.adapter = adapter
+        categorySpinner.adapter = adapter
+    }
+
+    private fun getCategoryByTransactionType(type: TransactionType): Int {
+        return if (type == TransactionType.INCOME) {
+            R.array.income_category
+        } else {
+            R.array.outgo_category
+        }
     }
 
     private fun setupDate() {
@@ -77,13 +99,15 @@ class TransactionDialog(private val viewGroup: ViewGroup,
         val month = today.get(Calendar.MONTH)
         val day = today.get(Calendar.DAY_OF_MONTH)
 
-        layoutView.form_transaction_date.setText(today.formatDate())
+        dateEditText.setText(today.formatDate())
         layoutView.setOnClickListener {
-            DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, day)
-                layoutView.form_transaction_date.setText(selectedDate.formatDate())
-            }, year, month, day)
+            DatePickerDialog(context,
+                    { _, year, month, day ->
+                        val selectedDate = Calendar.getInstance()
+                        selectedDate.set(year, month, day)
+                        dateEditText.setText(selectedDate.formatDate())
+                    },
+                    year, month, day)
                     .show()
         }
     }
