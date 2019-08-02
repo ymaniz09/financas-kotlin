@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Finanças</string>
-    <string name="lista_transacoes_adiciona" />
     <string name="add_income">Add income</string>
     <string name="add_outgo">Add outgo</string>
-    <string name="altera_receita">Altera receita</string>
-    <string name="altera_despesa">Altera despesa</string>
+    <string name="change_income">Change income</string>
+    <string name="change_outgo">Change outgo</string>
     <string name="valor">Valor</string>
     <string name="data">Data</string>
-    <string name="categoria">Categoria</string>
-    <string name="receita">Receita</string>
-    <string name="despesa">Despesa</string>
+    <string name="category">Categoria</string>
+    <string name="income">Receita</string>
+    <string name="outgo">Despesa</string>
     <string name="total">Total</string>
     <string name="mes">Mês</string>
     <string name="ano">Ano</string>
