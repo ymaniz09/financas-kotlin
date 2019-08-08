@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.financask.R
-import br.com.alura.financask.delegate.TransactionDelegate
 import br.com.alura.financask.model.Transaction
 import br.com.alura.financask.model.TransactionType
 import br.com.alura.financask.ui.SummaryView
@@ -41,12 +40,10 @@ class ListTransactionsActivity : AppCompatActivity() {
 
     private fun setupTransactionDialog(type: TransactionType) {
         TransactionDialog(viewGroup, this)
-                .showDialog(type, object : TransactionDelegate {
-                    override fun delegate(transaction: Transaction) {
-                        addTransaction(transaction)
-                        activity_transactions_floating_action_button.close(true)
-                    }
-                })
+                .showDialog(type) {
+                    addTransaction(it)
+                    activity_transactions_floating_action_button.close(true)
+                }
     }
 
     private fun addTransaction(transaction: Transaction) {
@@ -71,11 +68,9 @@ class ListTransactionsActivity : AppCompatActivity() {
 
     private fun setupEditTransaction(clickedTransaction: Transaction, position: Int) {
         EditTransactionDialog(viewGroup, this)
-                .showDialog(clickedTransaction, object : TransactionDelegate {
-                    override fun delegate(transaction: Transaction) {
-                        editTransaction(transaction, position)
+                .showDialog(clickedTransaction) {
+                    editTransaction(it, position)
                     }
-                })
     }
 
     private fun editTransaction(transaction: Transaction, position: Int) {

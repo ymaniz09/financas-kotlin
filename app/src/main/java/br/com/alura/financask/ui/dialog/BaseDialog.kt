@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import br.com.alura.financask.R
-import br.com.alura.financask.delegate.TransactionDelegate
 import br.com.alura.financask.extension.convertToCalendar
 import br.com.alura.financask.extension.formatDate
 import br.com.alura.financask.model.Transaction
@@ -26,13 +25,13 @@ abstract class BaseDialog(private val context: Context,
     protected val categorySpinner = layoutView.form_transaction_category
     protected abstract val positiveButtonTitle: String
 
-    fun showDialog(type: TransactionType, transactionDelegate: TransactionDelegate) {
+    fun showDialog(type: TransactionType, delegate: (transaction: Transaction) -> Unit) {
         setupDate()
         setupCategory(type)
-        setupInputDialog(type, transactionDelegate)
+        setupInputDialog(type, delegate)
     }
 
-    private fun setupInputDialog(type: TransactionType, transactionDelegate: TransactionDelegate) {
+    private fun setupInputDialog(type: TransactionType, delegate: (transaction: Transaction) -> Unit) {
         val title = getTitleByTransactionType(type)
 
         AlertDialog.Builder(context)
@@ -51,7 +50,7 @@ abstract class BaseDialog(private val context: Context,
                             date = date,
                             category = categoryString)
 
-                    transactionDelegate.delegate(newTransaction)
+                    delegate(newTransaction)
 
                 }
                 .setNegativeButton("Cancel", null)

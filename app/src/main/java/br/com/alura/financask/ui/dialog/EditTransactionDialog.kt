@@ -3,7 +3,6 @@ package br.com.alura.financask.ui.dialog
 import android.content.Context
 import android.view.ViewGroup
 import br.com.alura.financask.R
-import br.com.alura.financask.delegate.TransactionDelegate
 import br.com.alura.financask.extension.formatDate
 import br.com.alura.financask.model.Transaction
 import br.com.alura.financask.model.TransactionType
@@ -21,8 +20,8 @@ class EditTransactionDialog(viewGroup: ViewGroup,
         }
     }
 
-    fun showDialog(transaction: Transaction, transactionDelegate: TransactionDelegate) {
-        super.showDialog(transaction.type, transactionDelegate)
+    fun showDialog(transaction: Transaction, delegate: (transaction: Transaction) -> Unit) {
+        super.showDialog(transaction.type, delegate)
         setupFields(transaction)
     }
 
